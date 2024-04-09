@@ -1,27 +1,29 @@
-import { useState, useEffect } from 'react';
-
-export function createConnection(serverUrl, roomId) {
-  // A real implementation would actually connect to the server
-  return {
-    connect() {
-      console.log('✅ Connecting to "' + roomId + '" room at ' + serverUrl + '...');
-    },
-    disconnect() {
-      console.log('❌ Disconnected from "' + roomId + '" room at ' + serverUrl);
-    }
-  };
-}
+import React, { useState, useEffect } from 'react';
 
 function ChatRoom({ roomId }) {
-  const serverUrl = 'https://localhost:1234'; // Removed unused setServerUrl
+  const serverUrl = 'https://localhost:1234'; 
 
   useEffect(() => {
+    const createConnection = (url, id) => {
+      return {
+        connect: () => {
+          // Logic to establish connection
+        },
+        disconnect: () => {
+          // Logic to disconnect the connection
+        }
+      };
+    };
+
     const connection = createConnection(serverUrl, roomId);
     connection.connect();
+
     return () => {
       connection.disconnect();
     };
   }, [roomId, serverUrl]);
+
+  return null;
 }
 
 export default ChatRoom;
